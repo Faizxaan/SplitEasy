@@ -1,0 +1,21 @@
+# Backend
+spliteasy-backend/target/
+spliteasy-backend/*.log
+spliteasy-backend/.mvn/wrapper/maven-wrapper.jar
+
+# Frontend
+spliteasy-frontend/node_modules/
+spliteasy-frontend/dist/
+spliteasy-frontend/.env.local
+spliteasy-frontend/.env.development.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
