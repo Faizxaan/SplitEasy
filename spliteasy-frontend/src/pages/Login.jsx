@@ -169,11 +169,7 @@ export default function Login() {
             </Link>
           </p>
 
-          {/* Quick fill hint for dev */}
-          <div style={{ marginTop: 24, padding: '12px 16px', background: 'var(--bg-tertiary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-tertiary)', margin: '0 0 6px', fontWeight: 600 }}>Demo credentials</p>
-            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0, fontFamily: 'monospace' }}>faizan@spliteasy.com / password123</p>
-          </div>
+
         </motion.div>
       </div>
 
