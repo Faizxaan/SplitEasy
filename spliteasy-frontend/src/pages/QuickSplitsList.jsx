@@ -110,30 +110,32 @@ export default function DraftList() {
       />
 
       <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }}
-        style={{ marginBottom: 28, display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-          <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-secondary)', marginTop: 4, textDecoration: 'none', flexShrink: 0 }}>
-            <ArrowLeft size={16} />
-          </Link>
-          <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-            <h2 style={{ color: 'var(--text-primary)', margin: 0 }}>Quick Splits</h2>
-            <span style={{
-              display: 'inline-flex', alignItems: 'center', gap: 4,
-              background: 'var(--accent-bg)', color: 'var(--accent)', border: '1px solid rgba(99,102,241,0.25)',
-              padding: '3px 10px', borderRadius: 999, fontSize: '0.7rem', fontWeight: 700,
-            }}>
-              <Zap size={10} /> Quick Split mode
-            </span>
+        style={{ marginBottom: 28 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, flex: 1, minWidth: 0 }}>
+            <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)', background: 'var(--bg-secondary)', color: 'var(--text-secondary)', marginTop: 4, textDecoration: 'none', flexShrink: 0 }}>
+              <ArrowLeft size={16} />
+            </Link>
+            <div style={{ minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4, flexWrap: 'wrap' }}>
+                <h2 style={{ color: 'var(--text-primary)', margin: 0, fontSize: 'clamp(1.25rem, 5vw, 2rem)' }}>Quick Splits</h2>
+                <span style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 4,
+                  background: 'var(--accent-bg)', color: 'var(--accent)', border: '1px solid rgba(99,102,241,0.25)',
+                  padding: '3px 10px', borderRadius: 999, fontSize: '0.7rem', fontWeight: 700,
+                }}>
+                  <Zap size={10} /> Quick Split
+                </span>
+              </div>
+              <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', margin: 0 }}>
+                Quick splits with guests — no sign-up required for others.
+              </p>
+            </div>
           </div>
-          <p style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', margin: 0 }}>
-            Quick splits with guests — no sign-up required for others.
-          </p>
-          </div>
+          <Button icon={<Plus size={15} />} onClick={() => setShowCreate(true)} size="sm">
+            New Quick Split
+          </Button>
         </div>
-        <Button icon={<Plus size={15} />} onClick={() => setShowCreate(true)} size="sm">
-          New Quick Split
-        </Button>
       </motion.div>
 
       {loading ? (

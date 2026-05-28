@@ -65,14 +65,14 @@ export default function GroupDetail() {
         </div>
       ) : group ? (
         <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 24 }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, minWidth: 0, flex: 1 }}>
-              <div style={{ width: 56, height: 56, background: `${cat.color}20`, borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', flexShrink: 0 }}>
+          <div className="group-header-row" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0, flex: 1 }}>
+              <div style={{ width: 52, height: 52, background: `${cat.color}20`, borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>
                 {cat.icon}
               </div>
               <div style={{ minWidth: 0, flex: 1 }}>
-                <h2 style={{ color: 'var(--text-primary)', margin: '0 0 6px', letterSpacing: '-0.02em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{group.name}</h2>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+                <h2 style={{ color: 'var(--text-primary)', margin: '0 0 6px', letterSpacing: '-0.02em', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontSize: 'clamp(1.25rem, 5vw, 2rem)' }}>{group.name}</h2>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                   <span style={{ fontSize: '0.8rem', fontWeight: 700, color: cat.color, background: `${cat.color}20`, padding: '3px 10px', borderRadius: 999 }}>
                     {cat.icon} {cat.label}
                   </span>
@@ -91,7 +91,7 @@ export default function GroupDetail() {
                 </div>
               </div>
             </div>
-            <div style={{ display: 'flex', gap: 8 }}>
+            <div className="group-header-actions" style={{ display: 'flex', gap: 8 }}>
               <button
                 onClick={handleShare}
                 title="Share invite link"
@@ -119,7 +119,7 @@ export default function GroupDetail() {
       ) : null}
 
       {/* Tabs */}
-      <div style={{ display: 'flex', borderBottom: '2px solid var(--border)', marginBottom: 0, position: 'relative', overflowX: 'auto' }}>
+      <div style={{ display: 'flex', borderBottom: '2px solid var(--border)', marginBottom: 0, position: 'relative', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
         {[
           { id: 'expenses', label: 'Expenses', icon: <Receipt size={15} /> },
           { id: 'balances', label: 'Balances', icon: <DollarSign size={15} /> },
@@ -127,11 +127,12 @@ export default function GroupDetail() {
           { id: 'settings', label: 'Settings', icon: <Settings size={15} /> },
         ].map(t => (
           <button key={t.id} onClick={() => setTab(t.id)} style={{
-            display: 'flex', alignItems: 'center', gap: 6,
-            padding: '12px 18px', border: 'none', background: 'none',
+            display: 'flex', alignItems: 'center', gap: 5,
+            padding: '12px 14px', border: 'none', background: 'none',
             fontSize: '0.875rem', fontWeight: tab === t.id ? 700 : 500,
             color: tab === t.id ? 'var(--accent)' : 'var(--text-tertiary)',
             cursor: 'pointer', position: 'relative', transition: 'color 0.2s', whiteSpace: 'nowrap',
+            flex: '1 0 auto',
           }}>
             {t.icon}{t.label}
             {tab === t.id && (
@@ -289,6 +290,10 @@ export default function GroupDetail() {
           .group-fab {
             bottom: 32px;
           }
+        }
+        @media (max-width: 480px) {
+          .group-header-row { gap: 8px !important; }
+          .group-header-actions { width: 100%; justify-content: flex-end; }
         }
       `}</style>
     </div>

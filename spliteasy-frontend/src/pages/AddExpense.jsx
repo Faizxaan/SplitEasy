@@ -307,14 +307,15 @@ export default function AddExpense() {
         <SectionHeader>Split between</SectionHeader>
 
         {/* Split type pills */}
-        <div style={{ display: 'flex', gap: 6, marginBottom: 16 }}>
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16, flexWrap: 'wrap' }}>
           {SPLIT_TYPE_LIST.map(type => (
             <button key={type} onClick={() => setSplitType(type)} style={{
-              flex: 1, padding: '8px 0', borderRadius: 'var(--radius-sm)',
+              flex: '1 1 80px', padding: '8px 0', borderRadius: 'var(--radius-sm)',
               border: `1.5px solid ${splitType === type ? 'var(--accent)' : 'var(--border)'}`,
               background: splitType === type ? 'var(--accent-bg)' : 'transparent',
               color: splitType === type ? 'var(--accent)' : 'var(--text-secondary)',
               fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', transition: 'var(--transition)',
+              whiteSpace: 'nowrap',
             }}>
               {SPLIT_TYPES[type].label}
             </button>

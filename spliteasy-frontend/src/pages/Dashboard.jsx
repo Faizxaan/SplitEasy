@@ -449,8 +449,12 @@ export default function Dashboard() {
       </div>
 
       <style>{`
-        @media (max-width: 640px) {
+        @media (max-width: 480px) {
           .balance-grid { grid-template-columns: 1fr !important; }
+          .groups-grid  { grid-template-columns: 1fr !important; }
+        }
+        @media (min-width: 481px) and (max-width: 640px) {
+          .balance-grid { grid-template-columns: repeat(3,1fr) !important; }
           .groups-grid  { grid-template-columns: 1fr !important; }
         }
         @media (min-width: 641px) and (max-width: 900px) {

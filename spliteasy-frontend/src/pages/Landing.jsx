@@ -156,7 +156,7 @@ export default function Landing() {
         {/* ══════════════════════════════════════════════════
             HERO
         ══════════════════════════════════════════════════ */}
-        <section className="landing-hero-section" style={{ padding: '100px 0 80px', position: 'relative', overflow: 'hidden' }}>
+        <section className="landing-hero-section" style={{ padding: 'clamp(80px,12vw,120px) 0 60px', position: 'relative', overflow: 'hidden' }}>
           {/* Unified glow — spans the center+right, connects both halves */}
           <div style={{
             position: 'absolute', top: '-10%', left: '28%',
@@ -190,7 +190,8 @@ export default function Landing() {
 
                 <motion.div initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, delay: 0.14 }}
-                  style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 11 }}>
+                  style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 11 }}
+                  className="hero-cta-grid">
 
                   {/* Quick Split */}
                   <Link to="/quick-split" style={{ textDecoration: 'none' }}>
