@@ -9,8 +9,8 @@
 
   /* Text */
   --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-tertiary: #94A3B8;
+  --text-secondary: #334155;
+  --text-tertiary: #64748B;
 
   /* Accent */
   --accent: #6366F1;
@@ -61,24 +61,27 @@ body.dark {
   --bg-secondary: #131C2E;
   --bg-tertiary: #1B2640;
   --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-tertiary: #64748B;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
   --accent: #818CF8;
   --accent-light: #A5B4FC;
   --accent-dark: #6366F1;
   --accent-bg: #1E1B4B;
-  --border: #1E293B;
+  --border: #2D3748;
   --border-focus: #818CF8;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --success: #34D399;
   --success-bg: #064E3B;
-  --success-text: #6EE7B7;
+  --success-text: #A7F3D0;
+  --danger: #F87171;
   --danger-bg: #7F1D1D;
-  --danger-text: #FCA5A5;
+  --danger-text: #FECACA;
+  --warning: #FBBF24;
   --warning-bg: #78350F;
-  --warning-text: #FCD34D;
+  --warning-text: #FDE68A;
 }
 
 /* ─── Reset ──────────────────────────────────────────────── */

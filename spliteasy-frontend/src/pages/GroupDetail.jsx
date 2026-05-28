@@ -260,7 +260,7 @@ export default function GroupDetail() {
       {tab === 'expenses' && (
         <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.3 }}
-          style={{ position: 'fixed', bottom: 'calc(80px + env(safe-area-inset-bottom, 0px))', right: 24, zIndex: 80 }}>
+          className="group-fab">
           <button onClick={() => navigate(`/groups/${groupId}/expenses/new`)}
             style={{
               width: 56, height: 56, borderRadius: '50%',
@@ -277,6 +277,20 @@ export default function GroupDetail() {
           </button>
         </motion.div>
       )}
+
+      <style>{`
+        .group-fab {
+          position: fixed;
+          bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+          right: 24px;
+          z-index: 80;
+        }
+        @media (min-width: 769px) {
+          .group-fab {
+            bottom: 32px;
+          }
+        }
+      `}</style>
     </div>
   );
 }

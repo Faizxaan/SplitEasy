@@ -1,7 +1,4 @@
 import api from './axios';
-import axios from 'axios';
-
-const BASE = import.meta.env.VITE_API_BASE_URL || '/api';
 
 export const createDraftSession = (data) => api.post('/quick-splits', data);
 export const listDraftSessions = () => api.get('/quick-splits');
@@ -19,4 +16,4 @@ export const deleteDraftExpense = (draftId, expenseId) => api.delete(`/quick-spl
 export const getDraftSettlements = (draftId) => api.get(`/quick-splits/${draftId}/settlements`);
 
 export const getSharedDraft = (shareToken) =>
-  axios.get(`${BASE}/quick-splits/share/${shareToken}`);
+  api.get(`/quick-splits/share/${shareToken}`);

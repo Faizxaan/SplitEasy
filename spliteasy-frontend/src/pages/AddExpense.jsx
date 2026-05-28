@@ -303,7 +303,7 @@ export default function AddExpense() {
       </div>
 
       {/* Section 3: Split */}
-      <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 20, marginBottom: 100 }}>
+      <div style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)', padding: 20, marginBottom: 'calc(88px + env(safe-area-inset-bottom, 0px))' }}>
         <SectionHeader>Split between</SectionHeader>
 
         {/* Split type pills */}
@@ -440,15 +440,7 @@ export default function AddExpense() {
       </div>
 
       {/* Fixed bottom CTA */}
-      <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0,
-        paddingTop: 12, paddingLeft: 20, paddingRight: 20,
-        paddingBottom: 'calc(24px + env(safe-area-inset-bottom, 0px))',
-        background: 'var(--bg-primary)',
-        borderTop: '1px solid var(--border)',
-        backdropFilter: 'blur(12px)',
-        zIndex: 80,
-      }}>
+      <div className="add-expense-cta">
         <div style={{ maxWidth: 560, margin: '0 auto' }}>
           <Button
             fullWidth size="lg"
@@ -461,6 +453,29 @@ export default function AddExpense() {
           </Button>
         </div>
       </div>
+
+      <style>{`
+        .add-expense-cta {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding-top: 12px;
+          padding-left: 20px;
+          padding-right: 20px;
+          padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+          background: var(--bg-primary);
+          border-top: 1px solid var(--border);
+          backdrop-filter: blur(12px);
+          z-index: 80;
+        }
+        @media (max-width: 768px) {
+          .add-expense-cta {
+            bottom: 64px;
+            padding-bottom: 12px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
