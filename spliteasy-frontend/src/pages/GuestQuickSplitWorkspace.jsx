@@ -177,38 +177,61 @@ function ExpenseRow({ exp, currency, onEdit, onDelete }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div style={{
-      display: 'flex', alignItems: expanded ? 'flex-start' : 'center', gap: 10, padding: '10px 12px',
-      borderRadius: 'var(--radius-md)', transition: 'background 0.15s', cursor: 'pointer'
+      display: 'flex', flexDirection: 'column', padding: '10px 12px', gap: expanded ? 12 : 0,
+      borderRadius: 'var(--radius-md)', transition: 'all 0.2s ease', cursor: 'pointer',
+      background: expanded ? 'var(--bg-secondary)' : 'transparent',
+      border: expanded ? '1px solid var(--border)' : '1px solid transparent',
+      boxShadow: expanded ? 'var(--shadow-sm)' : 'none',
+      marginBottom: expanded ? 4 : 0
     }}
       onClick={() => setExpanded(e => !e)}
-      onMouseEnter={e => e.currentTarget.style.background = 'var(--bg-tertiary)'}
-      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+      onMouseEnter={e => { if(!expanded) e.currentTarget.style.background = 'var(--bg-tertiary)' }}
+      onMouseLeave={e => { if(!expanded) e.currentTarget.style.background = 'transparent' }}
       title={!expanded ? "Click to expand details" : ""}
     >
-      <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>{getCatIcon(exp.category)}</span>
-      <div style={{ flex: '1 1 auto', minWidth: 0, paddingRight: 8 }}>
-        <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: expanded ? 'clip' : 'ellipsis', whiteSpace: expanded ? 'normal' : 'nowrap', wordBreak: 'break-word' }}>
-          {exp.description}
-        </p>
-        <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-          {exp.paidByParticipantName} paid
-        </p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ fontSize: '1.25rem', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', width: 36, height: 36, borderRadius: '50%', background: expanded ? 'var(--bg-tertiary)' : 'transparent', transition: 'background 0.2s' }}>
+          {getCatIcon(exp.category)}
+        </span>
+        <div style={{ flex: '1 1 auto', minWidth: 0, paddingRight: 8 }}>
+          <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: expanded ? 'clip' : 'ellipsis', whiteSpace: expanded ? 'normal' : 'nowrap', wordBreak: 'break-word' }}>
+            {exp.description}
+          </p>
+          <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {exp.paidByParticipantName} paid
+          </p>
+        </div>
+        {!expanded && (
+          <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 1, minWidth: 0, maxWidth: '40%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'right' }}>
+            {formatCurrency(exp.amount, currency)}
+          </span>
+        )}
+        <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
+          <button className="tap-sm" onClick={(e) => { e.stopPropagation(); onEdit(exp); }}
+            style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6 }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
+          ><Edit2 size={13} /></button>
+          <button className="tap-sm" onClick={(e) => { e.stopPropagation(); onDelete(exp.id); }}
+            style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6 }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--danger)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
+          ><Trash2 size={13} /></button>
+        </div>
       </div>
-      <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 1, minWidth: 0, maxWidth: expanded ? '100%' : '45%', overflow: 'hidden', textOverflow: expanded ? 'clip' : 'ellipsis', whiteSpace: expanded ? 'normal' : 'nowrap', textAlign: 'right', wordBreak: 'break-word' }}>
-        {formatCurrency(exp.amount, currency)}
-      </span>
-      <div style={{ display: 'flex', gap: 4, flexShrink: 0, marginTop: expanded ? -2 : 0 }}>
-        <button className="tap-sm" onClick={(e) => { e.stopPropagation(); onEdit(exp); }}
-          style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6, flexShrink: 0 }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
-        ><Edit2 size={13} /></button>
-        <button className="tap-sm" onClick={(e) => { e.stopPropagation(); onDelete(exp.id); }}
-          style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6, flexShrink: 0 }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--danger)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
-        ><Trash2 size={13} /></button>
-      </div>
+      
+      <AnimatePresence>
+        {expanded && (
+          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: 'hidden' }}>
+             <div style={{ borderTop: '1px solid var(--border)', paddingTop: 12, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Total Amount</span>
+                <span style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--text-primary)', wordBreak: 'break-all' }}>
+                  {formatCurrency(exp.amount, currency)}
+                </span>
+             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
