@@ -719,7 +719,7 @@ export default function GuestQuickSplitWorkspace() {
                   <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {exp.description}
                   </p>
-                  <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                  <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {exp.paidByParticipantName} paid
                   </p>
                 </div>
@@ -727,13 +727,13 @@ export default function GuestQuickSplitWorkspace() {
                   {formatCurrency(exp.amount, currency)}
                 </span>
                 <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
-                  <button onClick={() => { setEditingExpense(exp); setShowAddExpense(true); }}
-                    style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6 }}
+                  <button className="tap-sm" onClick={() => { setEditingExpense(exp); setShowAddExpense(true); }}
+                    style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6, flexShrink: 0 }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
                   ><Edit2 size={13} /></button>
-                  <button onClick={() => handleDeleteExpense(exp.id)}
-                    style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6 }}
+                  <button className="tap-sm" onClick={() => handleDeleteExpense(exp.id)}
+                    style={{ width: 28, height: 28, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', borderRadius: 6, flexShrink: 0 }}
                     onMouseEnter={e => e.currentTarget.style.color = 'var(--danger)'}
                     onMouseLeave={e => e.currentTarget.style.color = 'var(--text-tertiary)'}
                   ><Trash2 size={13} /></button>
