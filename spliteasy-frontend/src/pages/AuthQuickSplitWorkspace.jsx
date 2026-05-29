@@ -635,7 +635,7 @@ export default function DraftWorkspace() {
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
                 <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>{getCatIcon(exp.category)}</span>
-                <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ flex: '1 1 auto', minWidth: 0, paddingRight: 8 }}>
                   <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {exp.description}
                   </p>
@@ -643,7 +643,7 @@ export default function DraftWorkspace() {
                     {exp.paidByParticipantName} paid
                   </p>
                 </div>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 1, minWidth: 0, maxWidth: '45%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', textAlign: 'right' }}>
                   {formatCurrency(exp.amount, currency)}
                 </span>
                 <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
