@@ -25,7 +25,7 @@ const CATEGORY_OPTIONS = [
 export default function SettingsTab({ group, members, onGroupUpdated }) {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const isCreator = group?.createdById === user?.id;
+  const isCreator = group?.createdBy?.id === user?.id;
 
   const [name, setName] = useState(group?.name || '');
   const [description, setDescription] = useState(group?.description || '');
