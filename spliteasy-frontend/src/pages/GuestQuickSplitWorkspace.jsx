@@ -177,6 +177,9 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
   const [desc, setDesc] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('FOOD');
+  const [splitType, setSplitType] = useState('EQUAL');
+  const [amountFocused, setAmountFocused] = useState(false);
+  const [showPayerPicker, setShowPayerPicker] = useState(false);
   const [paidBy, setPaidBy] = useState('');
   const [splits, setSplits] = useState({});
 
