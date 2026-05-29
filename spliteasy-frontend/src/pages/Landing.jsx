@@ -94,10 +94,10 @@ function FeatureCard({ icon: Icon, color, bg, title, description, delay, feature
   return (
     <ScrollReveal delay={delay}>
       <motion.div
-        whileHover={{ y: -5, borderColor: featured ? 'rgba(99,102,241,0.6)' : 'rgba(255,255,255,0.14)' }}
+        whileHover={{ y: -5, borderColor: featured ? 'rgba(99,102,241,0.6)' : 'var(--border)' }}
         transition={{ duration: 0.22 }}
         style={{
-          background: 'rgba(255,255,255,0.03)', border: featured ? '1.5px solid rgba(99,102,241,0.32)' : '1px solid rgba(255,255,255,0.07)',
+          background: 'var(--bg-secondary)', border: featured ? '1.5px solid rgba(99,102,241,0.32)' : '1px solid var(--border)',
           borderRadius: 18, padding: '24px 22px', cursor: 'default',
           transition: 'border-color 0.25s ease', position: 'relative', overflow: 'hidden',
         }}
@@ -124,7 +124,7 @@ function StepCard({ number, icon: Icon, title, description, delay }) {
           <div style={{ width: 68, height: 68, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', borderRadius: 18, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 8px 28px rgba(99,102,241,0.35)' }}>
             <Icon size={28} color="#fff" />
           </div>
-          <div style={{ position: 'absolute', top: -8, right: -8, width: 22, height: 22, background: 'rgba(10,13,28,0.95)', border: '1.5px solid rgba(99,102,241,0.5)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 800, color: '#818CF8' }}>{number}</div>
+          <div style={{ position: 'absolute', top: -8, right: -8, width: 22, height: 22, background: 'var(--bg-primary)', border: '1.5px solid rgba(99,102,241,0.5)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: 800, color: '#818CF8' }}>{number}</div>
         </div>
         <h3 style={{ color: 'var(--text-primary)', marginBottom: 10, fontSize: '1.1rem' }}>{title}</h3>
         <p style={{ fontSize: '0.9rem', maxWidth: 260, margin: '0 auto', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{description}</p>
@@ -205,9 +205,9 @@ export default function Landing() {
                         <div style={{ width: 32, height: 32, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 3px 10px rgba(99,102,241,0.35)' }}>
                           <Zap size={14} color="#fff" />
                         </div>
-                        <h3 style={{ color: '#fff', margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Quick Split</h3>
+                        <h3 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Quick Split</h3>
                       </div>
-                      <p style={{ color: 'rgba(255,255,255,0.58)', fontSize: '0.78rem', marginBottom: 10, lineHeight: 1.6, flex: 1 }}>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginBottom: 10, lineHeight: 1.6, flex: 1 }}>
                         Split in 60 seconds. Share via link — no login needed.
                       </p>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: '#818CF8', fontWeight: 700, fontSize: '0.775rem', marginBottom: 8 }}>
@@ -215,7 +215,7 @@ export default function Landing() {
                       </div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {['Add people', 'Log expenses', 'Share instantly'].map(f => (
-                          <span key={f} style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.09)', borderRadius: 999, padding: '1px 6px', fontSize: '0.6rem', color: 'rgba(255,255,255,0.36)' }}>{f}</span>
+                          <span key={f} style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 999, padding: '1px 6px', fontSize: '0.6rem', color: 'var(--text-tertiary)' }}>{f}</span>
                         ))}
                       </div>
                     </motion.div>
@@ -223,27 +223,27 @@ export default function Landing() {
 
                   {/* Full Account */}
                   <Link to="/register" style={{ textDecoration: 'none' }}>
-                    <motion.div whileHover={{ y: -4, borderColor: 'rgba(255,255,255,0.18)', boxShadow: '0 16px 40px rgba(0,0,0,0.3)' }}
+                    <motion.div whileHover={{ y: -4, borderColor: 'var(--border)', boxShadow: '0 16px 40px rgba(0,0,0,0.3)' }}
                       whileTap={{ scale: 0.985 }} transition={{ duration: 0.22 }}
-                      style={{ background: 'rgba(255,255,255,0.03)', border: '1.5px solid rgba(255,255,255,0.09)', borderRadius: 16, padding: '17px 15px', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, alignSelf: 'flex-start', background: 'rgba(99,102,241,0.1)', color: '#818CF8', border: '1px solid rgba(99,102,241,0.22)', borderRadius: 999, padding: '2px 7px', fontSize: '0.66rem', fontWeight: 700, marginBottom: 10 }}>
-                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#818CF8', display: 'inline-block' }} /> Free forever
+                      style={{ background: 'var(--bg-secondary)', border: '1.5px solid var(--border)', borderRadius: 16, padding: '17px 15px', height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, alignSelf: 'flex-start', background: 'var(--accent-bg)', color: 'var(--accent)', border: '1px solid rgba(99,102,241,0.22)', borderRadius: 999, padding: '2px 7px', fontSize: '0.66rem', fontWeight: 700, marginBottom: 10 }}>
+                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--accent)', display: 'inline-block' }} /> Free forever
                       </span>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-                        <div style={{ width: 32, height: 32, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                          <Users size={14} color="rgba(255,255,255,0.6)" />
+                        <div style={{ width: 32, height: 32, background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          <Users size={14} color="var(--text-secondary)" />
                         </div>
-                        <h3 style={{ color: '#fff', margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Full Account</h3>
+                        <h3 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '0.95rem', fontWeight: 700 }}>Full Account</h3>
                       </div>
-                      <p style={{ color: 'rgba(255,255,255,0.48)', fontSize: '0.78rem', marginBottom: 10, lineHeight: 1.6, flex: 1 }}>
+                      <p style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginBottom: 10, lineHeight: 1.6, flex: 1 }}>
                         Persistent groups, history, real-time balances and settlements.
                       </p>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'rgba(255,255,255,0.42)', fontWeight: 700, fontSize: '0.775rem', marginBottom: 8 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 5, color: 'var(--text-secondary)', fontWeight: 700, fontSize: '0.775rem', marginBottom: 8 }}>
                         Create Free Account <ArrowRight size={12} />
                       </div>
                       <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                         {['Groups', 'Expense history', 'Real-time sync'].map(f => (
-                          <span key={f} style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', borderRadius: 999, padding: '1px 6px', fontSize: '0.6rem', color: 'rgba(255,255,255,0.28)' }}>{f}</span>
+                          <span key={f} style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 999, padding: '1px 6px', fontSize: '0.6rem', color: 'var(--text-tertiary)' }}>{f}</span>
                         ))}
                       </div>
                     </motion.div>
@@ -391,7 +391,7 @@ export default function Landing() {
             FEATURES
         ══════════════════════════════════════════════════ */}
         <section ref={featuresRef} className="landing-section-padding" style={{ padding: '96px 0', position: 'relative' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'rgba(255,255,255,0.013)', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', pointerEvents: 'none' }} />
+          <div style={{ position: 'absolute', inset: 0, background: 'transparent', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', pointerEvents: 'none' }} />
           <div className="container" style={{ position: 'relative' }}>
             <ScrollReveal>
               <div style={{ textAlign: 'center', marginBottom: 56 }}>
@@ -413,8 +413,8 @@ export default function Landing() {
         {/* ══════════════════════════════════════════════════
             CTA BOTTOM
         ══════════════════════════════════════════════════ */}
-        <section className="landing-section-padding" style={{ padding: '96px 0', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.12) 50%, rgba(99,102,241,0.18) 100%)', pointerEvents: 'none' }} />
+        <section className="landing-section-padding" style={{ padding: '96px 0', position: 'relative', overflow: 'hidden', background: 'linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #1e1b4b 100%)' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(99,102,241,0.25) 0%, rgba(139,92,246,0.15) 50%, rgba(99,102,241,0.25) 100%)', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', top: -120, right: -120, width: 480, height: 480, background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: -80, left: -80, width: 360, height: 360, background: 'radial-gradient(circle, rgba(139,92,246,0.28) 0%, transparent 70%)', borderRadius: '50%', pointerEvents: 'none' }} />
 
@@ -456,7 +456,7 @@ export default function Landing() {
         {/* ══════════════════════════════════════════════════
             FOOTER
         ══════════════════════════════════════════════════ */}
-        <footer style={{ borderTop: '1px solid rgba(255,255,255,0.06)', padding: '32px 0', background: 'rgba(0,0,0,0.25)' }}>
+        <footer style={{ borderTop: '1px solid var(--border)', padding: '32px 0', background: 'var(--bg-secondary)' }}>
           <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div style={{ width: 24, height: 24, background: 'linear-gradient(135deg,#6366F1,#8B5CF6)', borderRadius: 6, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

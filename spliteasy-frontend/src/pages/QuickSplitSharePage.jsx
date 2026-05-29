@@ -35,7 +35,7 @@ export default function DraftSharePage() {
   }, [shareToken]);
 
   const containerStyle = {
-    minHeight: '100vh', background: 'linear-gradient(160deg,#F8FAFF 0%,#EEF2FF 100%)',
+    minHeight: '100vh', background: 'var(--bg-primary)',
     display: 'flex', flexDirection: 'column',
   };
 
@@ -112,18 +112,18 @@ export default function DraftSharePage() {
         {/* Title card */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
           style={{
-            background: '#fff', borderRadius: 16, padding: 24, marginBottom: 16,
-            boxShadow: '0 4px 24px rgba(99,102,241,0.12)', border: '1px solid rgba(99,102,241,0.1)',
+            background: 'var(--bg-secondary)', borderRadius: 16, padding: 24, marginBottom: 16,
+            boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)',
           }}
         >
-          <h2 style={{ color: '#0F172A', margin: '0 0 4px', fontSize: '1.5rem' }}>{draft.title}</h2>
-          <p style={{ color: '#64748B', margin: '0 0 16px', fontSize: '0.875rem' }}>
+          <h2 style={{ color: 'var(--text-primary)', margin: '0 0 4px', fontSize: '1.5rem' }}>{draft.title}</h2>
+          <p style={{ color: 'var(--text-tertiary)', margin: '0 0 16px', fontSize: '0.875rem' }}>
             {participants.length} people · {expenses.length} expenses
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div>
-              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 2px' }}>Total Cost</p>
-              <p style={{ fontSize: '2rem', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.03em' }}>
+              <p style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 2px' }}>Total Cost</p>
+              <p style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-0.03em' }}>
                 {formatCurrency(draft.totalAmount || 0, currency)}
               </p>
             </div>
@@ -133,20 +133,20 @@ export default function DraftSharePage() {
         {/* Settlement */}
         {settlements.length > 0 && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-            style={{ background: '#fff', borderRadius: 16, padding: 24, marginBottom: 16, boxShadow: '0 4px 24px rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.1)' }}
+            style={{ background: 'var(--bg-secondary)', borderRadius: 16, padding: 24, marginBottom: 16, boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-              <h3 style={{ color: '#0F172A', margin: 0, fontSize: '1rem' }}>Who owes what</h3>
+              <h3 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '1rem' }}>Who owes what</h3>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {settlements.map((debt, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: '#F8FAFC', borderRadius: 12, border: '1px solid #E2E8F0' }}>
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', background: 'var(--bg-tertiary)', borderRadius: 12, border: '1px solid var(--border)' }}>
                   <ParticipantAvatar p={debt.from} size={36} />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ margin: 0, fontWeight: 700, color: '#0F172A', fontSize: '0.875rem' }}>{debt.from.displayName}</p>
-                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#64748B' }}>owes {debt.to.displayName}</p>
+                    <p style={{ margin: 0, fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.875rem' }}>{debt.from.displayName}</p>
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>owes {debt.to.displayName}</p>
                   </div>
-                  <span style={{ fontWeight: 800, fontSize: '1rem', color: '#EF4444' }}>
+                  <span style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--danger)' }}>
                     {formatCurrency(debt.amount, currency)}
                   </span>
                 </div>
@@ -166,18 +166,18 @@ export default function DraftSharePage() {
 
         {/* People */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          style={{ background: '#fff', borderRadius: 16, padding: 24, marginBottom: 16, boxShadow: '0 4px 24px rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.1)' }}
+          style={{ background: 'var(--bg-secondary)', borderRadius: 16, padding: 24, marginBottom: 16, boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)' }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-            <Users size={16} color="#64748B" />
-            <h3 style={{ color: '#0F172A', margin: 0, fontSize: '1rem' }}>People ({participants.length})</h3>
+            <Users size={16} color="var(--text-tertiary)" />
+            <h3 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '1rem' }}>People ({participants.length})</h3>
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             {participants.map(p => (
-              <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: 999 }}>
+              <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 12px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 999 }}>
                 <ParticipantAvatar p={p} size={24} />
-                <span style={{ fontWeight: 600, color: '#0F172A', fontSize: '0.875rem' }}>{p.displayName}</span>
-                {p.isCreator && <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#6366F1' }}>Host</span>}
+                <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem' }}>{p.displayName}</span>
+                {p.isCreator && <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--accent)' }}>Host</span>}
               </div>
             ))}
           </div>
@@ -186,24 +186,24 @@ export default function DraftSharePage() {
         {/* Expenses */}
         {expenses.length > 0 && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}
-            style={{ background: '#fff', borderRadius: 16, padding: 24, marginBottom: 24, boxShadow: '0 4px 24px rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.1)' }}
+            style={{ background: 'var(--bg-secondary)', borderRadius: 16, padding: 24, marginBottom: 24, boxShadow: 'var(--shadow-md)', border: '1px solid var(--border)' }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-              <Receipt size={16} color="#64748B" />
-              <h3 style={{ color: '#0F172A', margin: 0, fontSize: '1rem' }}>Expenses ({expenses.length})</h3>
+              <Receipt size={16} color="var(--text-tertiary)" />
+              <h3 style={{ color: 'var(--text-primary)', margin: 0, fontSize: '1rem' }}>Expenses ({expenses.length})</h3>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {expenses.map((exp, i) => (
                 <div key={exp.id} style={{
                   display: 'flex', alignItems: 'center', gap: 10, padding: '10px 8px',
-                  borderBottom: i < expenses.length - 1 ? '1px solid #F1F5F9' : 'none',
+                  borderBottom: i < expenses.length - 1 ? '1px solid var(--border)' : 'none',
                 }}>
                   <span style={{ fontSize: '1.25rem', flexShrink: 0 }}>{getCatIcon(exp.category)}</span>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ margin: 0, fontWeight: 600, color: '#0F172A', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{exp.description}</p>
-                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#94A3B8' }}>{exp.paidByParticipantName} paid</p>
+                    <p style={{ margin: 0, fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.875rem', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{exp.description}</p>
+                    <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>{exp.paidByParticipantName} paid</p>
                   </div>
-                  <span style={{ fontWeight: 700, color: '#0F172A', flexShrink: 0 }}>{formatCurrency(exp.amount, currency)}</span>
+                  <span style={{ fontWeight: 700, color: 'var(--text-primary)', flexShrink: 0 }}>{formatCurrency(exp.amount, currency)}</span>
                 </div>
               ))}
             </div>
@@ -212,7 +212,7 @@ export default function DraftSharePage() {
 
         {/* CTA */}
         <div style={{ textAlign: 'center', padding: '8px 0 32px' }}>
-          <p style={{ color: '#94A3B8', fontSize: '0.8125rem', marginBottom: 12 }}>
+          <p style={{ color: 'var(--text-tertiary)', fontSize: '0.8125rem', marginBottom: 12 }}>
             Want to create your own split? It's free.
           </p>
           <Link to="/register" style={{
