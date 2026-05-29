@@ -271,10 +271,10 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
           />
         </div>
 
-        <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 4 }}>
+        <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 4 }} className="hide-scrollbar">
           {EXPENSE_CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => setCategory(cat.value)} style={{
-              display: 'flex', alignItems: 'center', gap: 4,
+              display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0,
               padding: '5px 10px', borderRadius: 999, whiteSpace: 'nowrap',
               border: `1.5px solid ${category === cat.value ? 'var(--accent)' : 'var(--border)'}`,
               background: category === cat.value ? 'var(--accent-bg)' : 'transparent',

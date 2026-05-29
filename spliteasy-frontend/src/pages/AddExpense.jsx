@@ -216,14 +216,19 @@ export default function AddExpense() {
           />
         </div>
 
-        <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 4, marginBottom: 14 }}>
+        <div style={{
+          display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 6,
+          marginBottom: 14, marginLeft: -20, marginRight: -20,
+          paddingLeft: 20, paddingRight: 20,
+          WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none',
+        }}>
           {CATEGORIES.map(cat => (
             <button key={cat.value} onClick={() => setCategory(cat.value)} style={{
-              display: 'flex', alignItems: 'center', gap: 5,
-              padding: '6px 12px', borderRadius: 999, border: `1.5px solid ${category === cat.value ? cat.color : 'var(--border)'}`,
-              background: category === cat.value ? cat.bg : 'transparent',
+              display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0,
+              padding: '7px 13px', borderRadius: 999, border: `1.5px solid ${category === cat.value ? cat.color : 'var(--border)'}`,
+              background: category === cat.value ? cat.bg : 'var(--bg-tertiary)',
               color: category === cat.value ? cat.color : 'var(--text-secondary)',
-              fontWeight: 600, fontSize: '0.8rem', cursor: 'pointer',
+              fontWeight: 600, fontSize: '0.82rem', cursor: 'pointer',
               whiteSpace: 'nowrap', transition: 'var(--transition)',
             }}>
               <span>{cat.icon}</span>{cat.label}
@@ -476,6 +481,8 @@ export default function AddExpense() {
             padding-bottom: 12px;
           }
         }
+        .cat-pill-scroll { scrollbar-width: none; }
+        .cat-pill-scroll::-webkit-scrollbar { display: none; }
       `}</style>
     </div>
   );

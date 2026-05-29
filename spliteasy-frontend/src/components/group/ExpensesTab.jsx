@@ -153,12 +153,13 @@ export default function ExpensesTab({ groupId, currency, currentUserId }) {
 
   return (
     <div style={{ paddingTop: 12 }}>
-      <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 8, marginBottom: 12 }}>
+      <div style={{ display: 'flex', gap: 8, overflowX: 'auto', paddingBottom: 6, marginBottom: 12, scrollbarWidth: 'none' }}
+        className="hide-scrollbar">
         {CATEGORY_FILTERS.map(cat => {
           const active = catFilter === cat;
           return (
             <button key={cat} onClick={() => setCatFilter(cat)} style={{
-              padding: '6px 14px', borderRadius: 999,
+              padding: '6px 14px', borderRadius: 999, flexShrink: 0,
               border: `1.5px solid ${active ? 'var(--accent)' : 'var(--border)'}`,
               background: active ? 'var(--accent-bg)' : 'transparent',
               color: active ? 'var(--accent)' : 'var(--text-secondary)',
@@ -170,10 +171,10 @@ export default function ExpensesTab({ groupId, currency, currentUserId }) {
           );
         })}
         <button onClick={() => setSortDir(d => d === 'desc' ? 'asc' : 'desc')} style={{
-          marginLeft: 'auto', padding: '6px 14px', borderRadius: 999,
+          marginLeft: 'auto', padding: '6px 14px', borderRadius: 999, flexShrink: 0,
           border: '1.5px solid var(--border)', background: 'transparent',
           color: 'var(--text-secondary)', fontWeight: 600, fontSize: '0.8rem',
-          cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
+          cursor: 'pointer', whiteSpace: 'nowrap',
         }}>
           {sortDir === 'desc' ? 'Newest ↓' : 'Oldest ↑'}
         </button>

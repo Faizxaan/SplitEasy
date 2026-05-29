@@ -139,6 +139,10 @@ button, a, [role='button'] {
 /* Pill tags, icon-only decorative elements, and small inline elements */
 .tap-sm, [data-size="xs"] { min-height: unset !important; min-width: unset !important; }
 
+/* ─── Hide scrollbar utility (for pill/tab scroll rows) ─── */
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
 /* ─── Navbar: hide "Log In" text button on very small phones
        (keeps "Get Started" CTA + dark mode toggle) ─────── */
 @media (max-width: 460px) {
