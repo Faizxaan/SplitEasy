@@ -174,7 +174,7 @@ export default function Register() {
                 error={errors.password}
                 autoComplete="new-password"
                 iconRight={
-                  <button type="button" onClick={() => setShowPass(p => !p)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', display: 'flex', padding: 0 }}>
+                  <button type="button" className="tap-sm" onClick={() => setShowPass(p => !p)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
                     {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 }
