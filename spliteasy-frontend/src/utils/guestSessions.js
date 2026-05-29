@@ -56,9 +56,23 @@ export function computeSettlements(participants, expenses) {
   expenses.forEach(exp => {
     if (!Object.prototype.hasOwnProperty.call(balance, exp.paidByParticipantId)) return;
     balance[exp.paidByParticipantId] += exp.amount;
-    const n = participants.length;
-    const share = exp.amount / n;
-    participants.forEach(p => { balance[p.id] -= share; });
+
+    if (!exp.splits || exp.splits.length === 0 || exp.splitType === 'EQUAL' || !exp.splitType) {
+      const n = participants.length;
+      const share = exp.amount / n;
+      participants.forEach(p => { balance[p.id] -= share; });
+    } else {
+      if (exp.splitType === 'EXACT') {
+        exp.splits.forEach(s => { if (balance[s.participantId] !== undefined) balance[s.participantId] -= (s.shareValue || 0); });
+      } else if (exp.splitType === 'PERCENTAGE') {
+        exp.splits.forEach(s => { if (balance[s.participantId] !== undefined) balance[s.participantId] -= (exp.amount * (s.shareValue || 0)) / 100; });
+      } else if (exp.splitType === 'SHARES') {
+        const totalShares = exp.splits.reduce((sum, s) => sum + (s.shareValue || 0), 0);
+        if (totalShares > 0) {
+          exp.splits.forEach(s => { if (balance[s.participantId] !== undefined) balance[s.participantId] -= (exp.amount * (s.shareValue || 0)) / totalShares; });
+        }
+      }
+    }
   });
 
   const creditors = [], debtors = [];

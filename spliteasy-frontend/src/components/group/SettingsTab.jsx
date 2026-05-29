@@ -63,7 +63,7 @@ export default function SettingsTab({ group, members, onGroupUpdated }) {
 
   const handleSave = async () => {
     if (!name.trim()) return;
-    if (name.trim().length > 50) { toast.error('Group name must not exceed 50 characters'); return; }
+    if (name.trim().length > 30) { toast.error('Group name must not exceed 30 characters'); return; }
     if (!/^[a-zA-Z0-9\s\-_&']+$/.test(name)) { toast.error('Group name contains invalid characters'); return; }
     setSaving(true);
     try {
@@ -110,7 +110,7 @@ export default function SettingsTab({ group, members, onGroupUpdated }) {
           <Input
             label="Group Name"
             value={name}
-            maxLength={50}
+            maxLength={30}
             onChange={e => { setName(e.target.value); setNameDirty(true); }}
             disabled={!isCreator}
           />

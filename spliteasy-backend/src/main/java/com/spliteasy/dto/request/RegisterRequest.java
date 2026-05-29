@@ -9,7 +9,7 @@ import lombok.Data;
 public class RegisterRequest {
 
     @NotBlank(message = "Full name is required")
-    @Size(min = 2, max = 50, message = "Full name must be between 2 and 50 characters")
+    @Size(min = 2, max = 30, message = "Full name must be between 2 and 30 characters")
     @jakarta.validation.constraints.Pattern(regexp = "^[a-zA-Z0-9\\s\\-_&']+$", message = "Name contains invalid characters")
     private String fullName;
 

@@ -94,7 +94,7 @@ function CreateGroupModal({ isOpen, onClose, onCreated }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!name.trim()) { setError('Group name is required'); return; }
-    if (name.trim().length > 50) { setError('Group name must not exceed 50 characters'); return; }
+    if (name.trim().length > 30) { setError('Group name must not exceed 30 characters'); return; }
     if (!/^[a-zA-Z0-9\s\-_&']+$/.test(name)) { setError('Group name contains invalid characters'); return; }
     setLoading(true);
     try {
@@ -110,7 +110,7 @@ function CreateGroupModal({ isOpen, onClose, onCreated }) {
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Create a New Group" maxWidth={480}>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <Input label="Group name" placeholder="e.g. Goa Trip 2026" value={name} maxLength={50}
+        <Input label="Group name" placeholder="e.g. Goa Trip 2026" value={name} maxLength={30}
           onChange={e => { setName(e.target.value); setError(''); }} error={error} autoFocus />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           <label style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>

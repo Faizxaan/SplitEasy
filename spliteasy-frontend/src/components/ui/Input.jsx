@@ -58,6 +58,7 @@ export default function Input({
             color: 'var(--text-primary)',
             outline: 'none',
             transition: 'var(--transition)',
+            boxSizing: 'border-box',
             boxShadow: focused ? (error ? '0 0 0 3px rgba(239,68,68,0.15)' : '0 0 0 3px rgba(99,102,241,0.15)') : 'none',
             ...style,
           }}

@@ -13,6 +13,8 @@ import {
 import { useAuth } from '../hooks/useAuth';
 import Button from '../components/ui/Button';
 import Modal from '../components/ui/Modal';
+import { SkeletonCard } from '../components/ui/Skeleton';
+import SplitInputs from '../components/group/SplitInputs';
 import ConfirmDialog from '../components/ui/ConfirmDialog';
 import Avatar from '../components/ui/Avatar';
 import { formatCurrency } from '../utils/formatCurrency';
@@ -79,7 +81,7 @@ function AddPersonModal({ isOpen, onClose, onAdded, existingNames }) {
   const queueName = () => {
     const parts = input.split(/[,\n]+/).map(s => s.trim()).filter(Boolean);
     const valid = parts.filter(name => {
-      if (name.length > 50) { toast.error(`"${name.slice(0,10)}..." exceeds 50 characters`); return false; }
+      if (name.length > 30) { toast.error(`"${name.slice(0,10)}..." exceeds 30 characters`); return false; }
       if (!/^[a-zA-Z0-9\s\-_&']+$/.test(name)) { toast.error(`"${name}" contains invalid characters`); return false; }
       if (existingNames.includes(name.toLowerCase())) { toast.error(`"${name}" already exists`); return false; }
       if (queued.map(q => q.toLowerCase()).includes(name.toLowerCase())) return false;
@@ -188,9 +190,7 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
   const [category, setCategory] = useState('FOOD');
   const [paidBy, setPaidBy] = useState('');
   const [splitType, setSplitType] = useState('EQUAL');
-  const [saving, setSaving] = useState(false);
-  const [amountFocused, setAmountFocused] = useState(false);
-  const [showPayerPicker, setShowPayerPicker] = useState(false);
+  const [splits, setSplits] = useState({});
 
   useEffect(() => {
     if (isOpen) {
@@ -200,10 +200,28 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
         setCategory(editingExpense.category || 'FOOD');
         setPaidBy(editingExpense.paidByParticipantId || '');
         setSplitType(editingExpense.splitType || 'EQUAL');
+        
+        const newSplits = {};
+        participants.forEach(p => { newSplits[p.id] = { checked: false, amount: '', percentage: '', shares: 1 }; });
+        (editingExpense.splits || []).forEach(s => {
+          newSplits[s.participantId] = {
+            checked: true,
+            amount: String(s.shareValue || ''),
+            percentage: String(s.shareValue || ''),
+            shares: s.shareValue || 1,
+          };
+          if (editingExpense.splitType === 'EXACT' && s.amount !== undefined) {
+             newSplits[s.participantId].amount = String(s.amount || s.shareValue || '');
+          }
+        });
+        setSplits(newSplits);
       } else {
         setDesc(''); setAmount(''); setCategory('FOOD'); setSplitType('EQUAL');
         const creator = participants.find(p => p.isCreator);
         setPaidBy(creator?.id || participants[0]?.id || '');
+        const newSplits = {};
+        participants.forEach(p => { newSplits[p.id] = { checked: true, amount: '', percentage: '', shares: 1 }; });
+        setSplits(newSplits);
       }
     }
   }, [isOpen, editingExpense, participants]);
@@ -213,20 +231,46 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
   const payer = participants.find(p => p.id === paidBy);
   const payerInitials = payer ? payer.displayName.slice(0, 2).toUpperCase() : '?';
 
+  const updateSplit = (memberId, field, value) => {
+    setSplits(prev => ({ ...prev, [memberId]: { ...prev[memberId], [field]: value } }));
+  };
+
   const handleSave = async () => {
     if (!desc.trim()) { toast.error('Please enter a description'); return; }
     if (!amount || parseFloat(amount) <= 0) { toast.error('Please enter a valid amount'); return; }
     if (!paidBy) { toast.error('Please select who paid'); return; }
+
+    const checkedMembers = participants.filter(m => splits[m.id]?.checked);
+    if (checkedMembers.length === 0) { toast.error('Please select at least one person to split with'); return; }
+
+    const totalAmt = parseFloat(amount);
+    let finalSplits = [];
+    if (splitType === 'EXACT') {
+      const exactTotal = checkedMembers.reduce((s, m) => s + (parseFloat(splits[m.id]?.amount) || 0), 0);
+      if (Math.abs(exactTotal - totalAmt) >= 0.01) { toast.error('Exact amounts must add up to the total'); return; }
+      finalSplits = checkedMembers.map(m => ({ participantId: m.id, participantName: m.displayName, shareValue: parseFloat(splits[m.id].amount) || 0 }));
+    } else if (splitType === 'PERCENTAGE') {
+      const pctTotal = checkedMembers.reduce((s, m) => s + (parseFloat(splits[m.id]?.percentage) || 0), 0);
+      if (Math.abs(pctTotal - 100) >= 0.01) { toast.error('Percentages must add up to 100%'); return; }
+      finalSplits = checkedMembers.map(m => ({ participantId: m.id, participantName: m.displayName, shareValue: parseFloat(splits[m.id].percentage) || 0 }));
+    } else if (splitType === 'SHARES') {
+      const sharesTotal = checkedMembers.reduce((s, m) => s + (parseInt(splits[m.id]?.shares) || 0), 0);
+      if (sharesTotal <= 0) { toast.error('Total shares must be greater than 0'); return; }
+      finalSplits = checkedMembers.map(m => ({ participantId: m.id, participantName: m.displayName, shareValue: parseInt(splits[m.id].shares) || 1 }));
+    } else {
+      finalSplits = checkedMembers.map(m => ({ participantId: m.id, participantName: m.displayName }));
+    }
+
     setSaving(true);
     try {
       const payload = {
         description: desc.trim(),
-        amount: parseFloat(amount),
+        amount: totalAmt,
         category,
         paidByParticipantId: paidBy,
         splitType,
         expenseDate: new Date().toISOString().split('T')[0],
-        splits: splitType === 'EQUAL' ? [] : [],
+        splits: finalSplits,
       };
       await onSaved(payload, editingExpense?.id);
       onClose();
@@ -320,7 +364,7 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
 
         <div>
           <p style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-tertiary)', textTransform: 'uppercase', letterSpacing: '0.05em', margin: '0 0 8px' }}>Split type</p>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 16 }}>
             {['EQUAL', 'EXACT', 'PERCENTAGE', 'SHARES'].map(t => (
               <button key={t} onClick={() => setSplitType(t)} style={{
                 padding: '6px 14px', borderRadius: 'var(--radius-full)', fontWeight: 600, fontSize: '0.8125rem',
@@ -333,6 +377,16 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
               </button>
             ))}
           </div>
+
+          <SplitInputs
+            members={participants}
+            splits={splits}
+            updateSplit={updateSplit}
+            splitType={splitType}
+            totalAmount={parseFloat(amount) || 0}
+            currency={currency}
+            paidById={paidBy}
+          />
         </div>
 
         <Button fullWidth size="lg" loading={saving} onClick={handleSave}>
@@ -586,7 +640,7 @@ export default function DraftWorkspace() {
                     {exp.paidByParticipantName} paid
                   </p>
                 </div>
-                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 0 }}>
+                <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', flexShrink: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {formatCurrency(exp.amount, currency)}
                 </span>
                 <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>

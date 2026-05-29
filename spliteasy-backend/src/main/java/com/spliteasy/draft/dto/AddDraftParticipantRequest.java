@@ -8,7 +8,7 @@ import lombok.Data;
 public class AddDraftParticipantRequest {
 
     @NotBlank
-    @Size(max = 50, message = "Name must not exceed 50 characters")
+    @Size(max = 30, message = "Name must not exceed 30 characters")
     @jakarta.validation.constraints.Pattern(regexp = "^[a-zA-Z0-9\\s\\-_&']+$", message = "Name contains invalid characters")
     private String displayName;
 }

@@ -11,7 +11,7 @@ import lombok.Data;
 public class CreateGroupRequest {
 
     @NotBlank(message = "Group name is required")
-    @Size(max = 50, message = "Group name must not exceed 50 characters")
+    @Size(max = 30, message = "Group name must not exceed 30 characters")
     @jakarta.validation.constraints.Pattern(regexp = "^[a-zA-Z0-9\\s\\-_&']+$", message = "Group name contains invalid characters")
     private String name;
 
