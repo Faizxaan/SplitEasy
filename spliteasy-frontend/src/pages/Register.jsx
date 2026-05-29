@@ -23,10 +23,14 @@ function getPasswordStrength(password) {
 function validate(fullName, email, password) {
   const errors = {};
   if (!fullName || fullName.trim().length < 2) errors.fullName = 'Full name must be at least 2 characters';
-  if (!email) errors.email = 'Email is required';
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Enter a valid email';
+  else if (fullName.trim().length > 50) errors.fullName = 'Full name must not exceed 50 characters';
+  else if (!/^[a-zA-Z0-9\s\-_&']+$/.test(fullName)) errors.fullName = 'Name contains invalid characters';
+  
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = 'Valid email is required';
+  
   if (!password) errors.password = 'Password is required';
   else if (password.length < 6) errors.password = 'Password must be at least 6 characters';
+  
   return errors;
 }
 

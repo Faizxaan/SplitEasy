@@ -12,6 +12,7 @@ public class CreateGroupRequest {
 
     @NotBlank(message = "Group name is required")
     @Size(max = 50, message = "Group name must not exceed 50 characters")
+    @jakarta.validation.constraints.Pattern(regexp = "^[a-zA-Z0-9\\s\\-_&']+$", message = "Group name contains invalid characters")
     private String name;
 
     @Size(max = 200, message = "Description must not exceed 200 characters")

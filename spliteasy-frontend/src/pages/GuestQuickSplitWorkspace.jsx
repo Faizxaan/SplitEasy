@@ -72,6 +72,8 @@ function AddPersonModal({ isOpen, onClose, onAdded, existingNames }) {
   const queueName = () => {
     const parts = input.split(/[,\n]+/).map(s => s.trim()).filter(Boolean);
     const valid = parts.filter(name => {
+      if (name.length > 50) { toast.error(`"${name.slice(0,10)}..." exceeds 50 characters`); return false; }
+      if (!/^[a-zA-Z0-9\s\-_&']+$/.test(name)) { toast.error(`"${name}" contains invalid characters`); return false; }
       if (existingNames.includes(name.toLowerCase())) { toast.error(`"${name}" already exists`); return false; }
       if (queued.map(q => q.toLowerCase()).includes(name.toLowerCase())) return false;
       return true;
@@ -97,6 +99,7 @@ function AddPersonModal({ isOpen, onClose, onAdded, existingNames }) {
         <input
           ref={inputRef} autoFocus value={input}
           onChange={e => setInput(e.target.value)}
+          maxLength={150} // allows multiple comma separated names
           onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); queueName(); } }}
           placeholder="Type a name, or multiple separated by comma"
           style={{
@@ -219,6 +222,7 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <input
           autoFocus value={desc} onChange={e => setDesc(e.target.value)}
+          maxLength={100}
           placeholder="What was this for? e.g. Hotel booking"
           style={{
             width: '100%', padding: '10px 12px', fontSize: '0.9375rem', boxSizing: 'border-box',
@@ -243,8 +247,12 @@ function AddExpenseModal({ isOpen, onClose, onSaved, participants, currency, edi
             fontSize: '1.1rem', fontWeight: 700, color: 'var(--accent)', transition: 'border-color 0.2s',
           }}>{currencySymbol}</span>
           <input
-            type="number" min="0" step="0.01" value={amount}
-            onChange={e => setAmount(e.target.value)} placeholder="0.00"
+            type="number" min="0" max="99999999.99" step="0.01" value={amount}
+            onChange={e => {
+              const val = e.target.value;
+              if (val && parseFloat(val) > 99999999.99) return;
+              setAmount(val);
+            }} placeholder="0.00"
             style={{
               flex: 1, padding: '0 16px', height: 56,
               fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em',

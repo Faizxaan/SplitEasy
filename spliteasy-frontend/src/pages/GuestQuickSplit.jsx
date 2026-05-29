@@ -26,6 +26,8 @@ function CreateSessionModal({ isOpen, onClose, onCreate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) { setError('Please enter a title'); return; }
+    if (title.trim().length > 50) { setError('Title must not exceed 50 characters'); return; }
+    if (!/^[a-zA-Z0-9\s\-_&']+$/.test(title)) { setError('Title contains invalid characters'); return; }
     const session = createNewSession(title.trim(), currency);
     persistSession(session);
     toast.success('Quick Split created! 🎉');
@@ -39,7 +41,7 @@ function CreateSessionModal({ isOpen, onClose, onCreate }) {
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
         <Input
           label="Session title" placeholder="e.g. Goa Trip, Dinner with friends"
-          value={title} onChange={e => { setTitle(e.target.value); setError(''); }}
+          value={title} maxLength={50} onChange={e => { setTitle(e.target.value); setError(''); }}
           error={error} autoFocus
         />
         <div>

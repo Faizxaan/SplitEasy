@@ -19,6 +19,7 @@ public class CreateExpenseRequest {
 
     @NotNull(message = "Amount is required")
     @Positive(message = "Amount must be positive")
+    @jakarta.validation.constraints.DecimalMax(value = "99999999.99", message = "Amount exceeds maximum allowed")
     @Digits(integer = 8, fraction = 2, message = "Amount format invalid")
     private BigDecimal amount;
 

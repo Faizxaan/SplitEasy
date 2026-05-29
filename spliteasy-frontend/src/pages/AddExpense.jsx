@@ -170,6 +170,7 @@ export default function AddExpense() {
           autoFocus
           value={description}
           onChange={e => setDescription(e.target.value)}
+          maxLength={100}
           placeholder="Description (e.g. Hotel booking)"
           style={{
             width: '100%', padding: '10px 12px', fontSize: '0.9375rem',
@@ -200,9 +201,14 @@ export default function AddExpense() {
           <input
             type="number"
             min="0"
+            max="99999999.99"
             step="0.01"
             value={amount}
-            onChange={e => setAmount(e.target.value)}
+            onChange={e => {
+              const val = e.target.value;
+              if (val && parseFloat(val) > 99999999.99) return;
+              setAmount(val);
+            }}
             placeholder="0.00"
             style={{
               flex: 1, padding: '0 16px', height: 60,
