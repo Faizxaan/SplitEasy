@@ -73,8 +73,8 @@ export default function DraftSharePage() {
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
           <div style={{ textAlign: 'center', maxWidth: 380 }}>
             <div style={{ fontSize: '3rem', marginBottom: 16 }}>🔗</div>
-            <h2 style={{ color: '#0F172A', marginBottom: 8 }}>Link not found</h2>
-            <p style={{ color: '#64748B', marginBottom: 24, lineHeight: 1.6 }}>
+            <h2 style={{ color: 'var(--text-primary)', marginBottom: 8 }}>Link not found</h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: 24, lineHeight: 1.6 }}>
               This shared split session may have been deleted or the link is invalid.
             </p>
             <Link to="/" style={{
@@ -157,10 +157,10 @@ export default function DraftSharePage() {
 
         {settlements.length === 0 && expenses.length > 0 && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
-            style={{ background: '#fff', borderRadius: 16, padding: 24, marginBottom: 16, textAlign: 'center', boxShadow: '0 4px 24px rgba(16,185,129,0.1)', border: '1px solid #A7F3D0' }}
+            style={{ background: 'var(--success-bg)', borderRadius: 16, padding: 24, marginBottom: 16, textAlign: 'center', border: '1px solid var(--success)' }}
           >
             <span style={{ fontSize: '2rem' }}>✅</span>
-            <p style={{ fontWeight: 700, color: '#065F46', fontSize: '1rem', margin: '8px 0 0' }}>Everyone is settled up!</p>
+            <p style={{ fontWeight: 700, color: 'var(--success-text)', fontSize: '1rem', margin: '8px 0 0' }}>Everyone is settled up!</p>
           </motion.div>
         )}
 

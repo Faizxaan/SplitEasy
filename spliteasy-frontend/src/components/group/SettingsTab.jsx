@@ -206,7 +206,7 @@ export default function SettingsTab({ group, members, onGroupUpdated }) {
                     {m.id === user?.id && <span style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', fontWeight: 400 }}> (you)</span>}
                   </p>
                   {m.id === group?.createdById && (
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: '0.7rem', fontWeight: 700, color: '#F59E0B', background: '#FFFBEB', padding: '2px 7px', borderRadius: 999 }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 3, fontSize: '0.7rem', fontWeight: 700, color: 'var(--warning)', background: 'var(--warning-bg)', padding: '2px 7px', borderRadius: 999 }}>
                       <Crown size={10} /> Creator
                     </span>
                   )}

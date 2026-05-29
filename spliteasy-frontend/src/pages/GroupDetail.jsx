@@ -225,7 +225,7 @@ export default function GroupDetail() {
                             <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--accent)', background: 'var(--accent-bg)', padding: '2px 7px', borderRadius: 999, border: '1px solid var(--accent)', flexShrink: 0 }}>You</span>
                           )}
                           {isCreator && (
-                            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: '#F59E0B', background: '#FEF3C7', padding: '2px 7px', borderRadius: 999, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--warning)', background: 'var(--warning-bg)', padding: '2px 7px', borderRadius: 999, flexShrink: 0, display: 'flex', alignItems: 'center', gap: 3 }}>
                               <Crown size={9} /> Creator
                             </span>
                           )}
